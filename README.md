@@ -1,30 +1,19 @@
-# Azekee Music — serverli, egasi himoyalangan versiya
+# Azekee Music — Netlify
 
-## Nima tayyor?
-- Premium, responsive musiqa sayti (`public/index.html`)
-- Qo‘shiqlar serverdan olinadi; hamma tashrif buyuruvchi tinglay oladi
-- Egasi login qilgandan keyingina upload boshqaruvi ko‘rinadi
-- Upload va o‘chirish API-lari serverda sessiya bilan himoyalangan
-- Parol HTML/JavaScript ichiga yozilmagan; bcrypt hash `.env` da saqlanadi
-- Login urinishlari cheklangan; sessiya cookie `httpOnly` va `sameSite`
-- Audio fayllar serverdagi `uploads/` papkasiga saqlanadi
+## Joylash
+1. ZIP'ni oching va ichidagi fayllarni GitHub repository'ga yuklang.
+2. Netlify: Add new project → Import an existing project → GitHub repository tanlang.
+3. `netlify.toml` build/publish/functions sozlamalarini belgilaydi.
+4. Kompyuterda Node.js 20+ o‘rnating, loyiha papkasida `npm install` bajaring.
+5. `npm run make-admin-hash` bajaring, kamida 12 belgili admin parolini kiriting. Chiqqan hashni nusxalang.
+6. Netlify → Project configuration → Environment variables ichiga:
+   - `ADMIN_USERNAME` = o‘zingiz tanlagan admin login (masalan, `azekee_admin`)
+   - `ADMIN_PASSWORD_HASH` = yaratilgan hash
+   - `SESSION_SECRET` = kamida 32 belgili tasodifiy maxfiy kalit
+   kiriting. Functions scope mavjud bo‘lsin.
+7. Netlify'da qayta deploy qiling. Saytda **Ega kirishi** tugmasi orqali `ADMIN_USERNAME` login va o‘zingiz yaratgan parol bilan kiring.
 
-## Ishga tushirish (Node.js 20+)
-1. ZIP arxivni oching.
-2. Terminalda loyiha papkasiga kiring.
-3. `npm install` bajaring.
-4. `.env.example` faylidan `.env` nusxa oling.
-5. `npm run make-admin-hash` bajaring va admin parolini kiriting (kamida 12 belgi). Chiqqan `ADMIN_PASSWORD_HASH` qiymatini `.env` ga joylang.
-6. `SESSION_SECRET` o‘rniga kamida 32 belgili tasodifiy maxfiy kalit yozing.
-7. `npm start` bajaring.
-8. Brauzerda `http://localhost:3000` ni oching. Egasi paneliga kirish uchun yuqoridagi **Ega kirishi** tugmasini bosing.
+## Saqlash va cheklov
+Audio fayllar Netlify Blobs'da saqlanadi va deploydan keyin ham qoladi. Netlify Functions so‘rovining hajm cheklovi sabab ushbu versiyada har bir audio fayl 4 MB gacha. Katta MP3 fayllar uchun to‘g‘ridan-to‘g‘ri object storage upload (S3/R2 kabi) integratsiyasi kerak.
 
-## Internetga joylash
-Node.js qo‘llaydigan hosting kerak (masalan, VPS yoki Node web service). Hosting sozlamalarida:
-- `NODE_ENV=production`
-- `ADMIN_PASSWORD_HASH` va `SESSION_SECRET` environment variable sifatida kiriting
-- HTTPS yoqing (production sessiya cookie HTTPS talab qiladi)
-- `uploads/` va `data/` papkalari doimiy diskda saqlanishini ta'minlang; aks holda qayta deploydan keyin yuklangan qo‘shiqlar yo‘qolishi mumkin.
-
-## Muhim
-Bu loyiha loginni serverda tekshiradi. Faqat frontenddagi yashirin tugma xavfsizlik hisoblanmaydi. Hostingga joylash va domeningizga ulash uchun hosting akkauntingizga kirish kerak bo‘ladi; bu ZIPning o‘zi hostingga avtomatik deploy qilmaydi.
+Parol va SESSION_SECRET'ni GitHub'ga yoki sayt kodiga yozmang. Production'da HTTPS ishlating.
