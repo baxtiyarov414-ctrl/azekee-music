@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090a10">
+<title>Azekee Music — Musiqa olami</title>
+<style>
+:root{--bg:#090a10;--panel:#121522;--panel2:#191e2d;--line:#292f43;--text:#f6f7fb;--muted:#929bb1;--lime:#c2ff5e;--violet:#9a7cff;--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% -5%,#33245d 0,transparent 32%),radial-gradient(ellipse at 0 40%,#132b35 0,transparent 26%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;padding-bottom:118px}
+button,input{font:inherit}button{cursor:pointer}.shell{max-width:1200px;margin:auto;padding:0 26px}
+header{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-weight:950;letter-spacing:-1.4px;font-size:25px}.logo span{color:var(--lime)}.logo i{font-style:normal;margin-left:5px}
+nav{display:flex;gap:26px}nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:650}nav a:hover{color:var(--lime)}
+.hero{position:relative;overflow:hidden;min-height:310px;padding:48px;border:1px solid #ffffff17;border-radius:30px;background:linear-gradient(112deg,#1a2737 0%,#1c1930 57%,#322252 100%);box-shadow:0 24px 80px #0005}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;pointer-events:none}.hero:before{width:310px;height:310px;right:7%;top:-110px;border:1px solid #ffffff18;box-shadow:0 0 0 28px #ffffff06,0 0 0 58px #ffffff04}.hero:after{content:"♫";right:10%;top:18px;font-size:210px;color:#ffffff0b;font-weight:900}
+.eyebrow{color:var(--lime);font-size:11px;letter-spacing:2.6px;font-weight:900;text-transform:uppercase}.hero h1{position:relative;z-index:1;font-size:clamp(38px,6vw,66px);line-height:.99;letter-spacing:-3px;max-width:680px;margin:17px 0}.hero h1 span{color:var(--lime)}.hero p{position:relative;z-index:1;color:#c0c5d3;line-height:1.7;max-width:520px;margin:0 0 25px}.btn{border:0;border-radius:13px;padding:13px 18px;background:var(--lime);color:#11170b;font-weight:850;box-shadow:0 7px 24px #c2ff5e22}.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}.btn.ghost{background:#ffffff0d;color:#f5f6fb;border:1px solid #ffffff1c;box-shadow:none}
+.toolbar{display:flex;gap:12px;margin:28px 0 34px}.search-wrap{position:relative;flex:1}.search-wrap span{position:absolute;left:17px;top:13px;color:var(--muted);font-size:18px}.search{width:100%;background:#141825;border:1px solid var(--line);color:white;padding:15px 18px 15px 48px;border-radius:14px;outline:none}.search:focus{border-color:#8e78e9;box-shadow:0 0 0 3px #9a7cff20}.section-head{display:flex;align-items:end;justify-content:space-between;margin:34px 0 17px}.section-head h2{font-size:23px;letter-spacing:-.7px;margin:0}.hint{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:17px}.card{min-width:0;background:linear-gradient(160deg,#171c2b,#111521);border:1px solid #ffffff0d;border-radius:19px;padding:12px;transition:.22s}.card:hover{transform:translateY(-4px);border-color:#ffffff30;box-shadow:0 16px 38px #0005}.cover{height:174px;border-radius:13px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:13px;background:linear-gradient(135deg,#51407d,#1d3151)}
+.cover:before{content:"";position:absolute;width:125px;height:125px;border:1px solid #ffffff35;border-radius:50%;box-shadow:0 0 0 17px #ffffff0a,0 0 0 36px #ffffff08}.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 30%,#0005)}.cover b{z-index:1;font-size:42px;font-weight:950;letter-spacing:-3px;text-shadow:0 4px 20px #0008}.cover .cover-tag{position:absolute;z-index:2;left:12px;bottom:10px;font-size:9px;letter-spacing:1.8px;font-weight:900;color:#ffffffb5}.song-title{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:4px 0}.artist{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:13px}.card-actions{display:flex;gap:7px}.small{border-radius:10px;padding:9px 10px;font-size:12px;flex:1}.play-card{border:0;background:var(--lime);color:#11170b;font-weight:850}.icon-btn{border:1px solid #ffffff18;background:#ffffff09;color:#fff;min-width:38px}.icon-btn.active{color:#ff6f91;border-color:#ff6f9144;background:#ff6f9114}.empty{grid-column:1/-1;text-align:center;padding:36px 18px;border:1px dashed #343b50;border-radius:17px;color:var(--muted);background:#ffffff04}
+.owner-panel{display:none;margin-top:34px;padding:23px;border:1px dashed #64708a;border-radius:20px;background:#111622}.owner-panel.show{display:block}.owner-panel h3{margin:0 0 7px}.owner-panel p{color:var(--muted);font-size:13px;line-height:1.6}.owner-panel input{color:var(--muted);max-width:100%;margin:8px 0}.owner-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.player{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#10131df2;backdrop-filter:blur(22px);border-top:1px solid #ffffff16;padding:12px 24px}.player-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(150px,1fr) auto minmax(180px,1.3fr);align-items:center;gap:22px}.now{min-width:0}.now strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now span{font-size:11px;color:var(--muted)}.controls{display:flex;align-items:center;gap:13px}.controls button{border:0;background:none;color:#f4f5fa;font-size:19px}.controls .play-main{width:42px;height:42px;border-radius:50%;background:var(--lime);color:#11170b;font-size:17px}.progress-area{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:10px}.progress-area input{width:100%;accent-color:var(--lime)}audio{display:none}
+footer{text-align:center;color:#69738b;font-size:11px;padding:35px 10px 15px}
+@media(max-width:700px){.shell{padding:0 16px}header{height:70px}nav{gap:13px}nav a{font-size:11px}.logo{font-size:21px}.hero{padding:30px 23px;min-height:290px}.hero:after{right:-20px;font-size:155px}.hero h1{letter-spacing:-2px}.toolbar{gap:8px}.toolbar .btn{padding:12px;font-size:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.cover{height:135px}.player{padding:10px 14px}.player-inner{grid-template-columns:1fr auto;gap:7px 12px}.now{grid-column:1}.controls{grid-column:2;grid-row:1}.progress-area{grid-column:1/-1}.section-head h2{font-size:20px}}
+@media(max-width:390px){nav{gap:8px}.nav-upload{display:none}.cover{height:115px}.card{padding:9px}.hero{padding:27px 19px}}
+</style>
+</head>
+<body>
+<header class="shell">
+  <div class="logo">AZEKEE<span> MUSIC</span><i>🎧</i></div>
+  <nav><a href="#songs">Musiqalar</a><a href="#favorites">Sevimlilar</a><a href="#ownerPanel" id="ownerNav" class="nav-upload" hidden>Ega kirishi</a></nav>
+</header>
+<main class="shell">
+  <section class="hero">
+    <div class="eyebrow">Sening musiqa olaming</div>
+    <h1>Ritmni his qil.<br><span>Musiqadan zavqlan.</span></h1>
+    <p>Sevimli treklaringni tingla, yangi musiqalarni kashf et va o‘zingga yoqqan qo‘shiqlarni sevimlilarga saqla.</p>
+    <button class="btn" onclick="document.querySelector('#songs').scrollIntoView({behavior:'smooth'})">Musiqalarni tinglash ↓</button>
+  </section>
+  <div class="toolbar">
+    <div class="search-wrap"><span>⌕</span><input class="search" id="search" placeholder="Qo‘shiq yoki ijrochini qidirish..." oninput="render()"></div>
+  </div>
+  <section id="songs">
+    <div class="section-head"><h2>🎵 Barcha musiqalar</h2><span class="hint" id="count">0 ta trek</span></div>
+    <div class="grid" id="songGrid"></div>
+  </section>
+  <section id="favorites">
+    <div class="section-head"><h2>❤️ Sevimlilar</h2><span class="hint">Siz tanlagan qo‘shiqlar</span></div>
+    <div class="grid" id="favGrid"></div>
+  </section>
+  <section class="owner-panel" id="ownerPanel">
+    <h3>🎼 Egasi uchun — boshqaruv paneli</h3>
+    <p>Bu bo‘lim faqat egasi tizimga kirganda ko‘rinadi. Yuklangan qo‘shiqlar barcha tashrif buyuruvchilarga ko‘rinadi.</p>
+    <div id="loginArea" class="owner-actions">
+      <input id="adminPassword" type="password" placeholder="Admin paroli" autocomplete="current-password" style="padding:12px;border-radius:10px;background:#0d111b;border:1px solid #343b50;color:white">
+      <button class="btn" id="loginBtn" onclick="ownerLogin()">Kirish</button>
+    </div>
+    <div id="uploadArea" hidden>
+      <div class="owner-actions"><input id="fileInput" type="file" accept="audio/*" multiple><button class="btn" onclick="uploadTracks()">Musiqa yuklash</button><button class="btn ghost" onclick="ownerLogout()">Chiqish</button></div>
+      <p id="uploadMessage" class="hint"></p>
+      <div id="manageSongs"></div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Azekee Music · Musiqa — kayfiyatning tili.</footer>
+<div class="player">
+  <div class="player-inner">
+    <div class="now"><strong id="nowTitle">Hozir ijro etilmayapti</strong><span id="nowArtist">Trek tanlang</span></div>
+    <div class="controls"><button aria-label="Oldingi qo‘shiq" onclick="prev()">⏮</button><button class="play-main" id="playBtn" aria-label="Ijro etish" onclick="togglePlay()">▶</button><button aria-label="Keyingi qo‘shiq" onclick="next()">⏭</button></div>
+    <div class="progress-area"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="100" value="0"><span id="duration">0:00</span></div>
+  </div>
+  <audio id="audio" preload="metadata"></audio>
+</div>
+<script>
+let songs=[],favorites=new Set(JSON.parse(localStorage.getItem('azekee-favorites')||'[]')),current=-1;
+const audio=document.getElementById('audio');
+const palettes=[['#633d8f','#183e58'],['#9b4f63','#37214f'],['#286b69','#1b3152'],['#a46a35','#4b2859'],['#3e5790','#23264b'],['#6d4d83','#263f48']];
+async function api(url,options={}){const response=await fetch(url,{credentials:'same-origin',...options});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'So‘rov bajarilmadi');return data}
+async function loadSongs(){try{songs=await api('/api/songs');render()}catch(e){document.getElementById('songGrid').innerHTML='<div class="empty">Musiqalarni yuklab bo‘lmadi. Server ishlayotganini tekshiring.</div>'}}
+async function checkOwner(){try{const state=await api('/api/admin/status');const panel=document.getElementById('ownerPanel');panel.classList.add('show');document.getElementById('ownerNav').hidden=state.isOwner;document.getElementById('loginArea').hidden=state.isOwner;document.getElementById('uploadArea').hidden=!state.isOwner;if(state.isOwner)renderManage()}catch{}}
+async function ownerLogin(){const password=document.getElementById('adminPassword').value;try{await api('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});document.getElementById('adminPassword').value='';await checkOwner();document.getElementById('ownerPanel').scrollIntoView({behavior:'smooth'})}catch(e){alert(e.message)}}
+async function ownerLogout(){try{await api('/api/admin/logout',{method:'POST'});await checkOwner()}catch(e){alert(e.message)}}
+async function uploadTracks(){const input=document.getElementById('fileInput');if(!input.files.length)return;const form=new FormData();[...input.files].forEach(f=>form.append('tracks',f));try{const result=await api('/api/admin/songs',{method:'POST',body:form});songs=result.songs;input.value='';document.getElementById('uploadMessage').textContent=result.added.length+' ta musiqa yuklandi.';render();renderManage()}catch(e){alert(e.message)}}
+async function deleteSong(id){if(!confirm('Bu qo‘shiqni o‘chirasizmi?'))return;try{await api('/api/admin/songs/'+encodeURIComponent(id),{method:'DELETE'});await loadSongs();renderManage()}catch(e){alert(e.message)}}
+function renderManage(){document.getElementById('manageSongs').innerHTML=songs.map(s=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #ffffff16"><span>${escapeHtml(s.title)}</span><button class="small icon-btn" onclick="deleteSong('${s.id}')">O‘chirish</button></div>`).join('')}
+function play(i){if(i<0||i>=songs.length)return;current=i;audio.src=songs[i].url;audio.play().catch(()=>{});document.getElementById('nowTitle').textContent=songs[i].title;document.getElementById('nowArtist').textContent=songs[i].artist;document.getElementById('playBtn').textContent='Ⅱ'}
+function togglePlay(){if(!audio.src){if(songs.length)play(0);return}if(audio.paused){audio.play();document.getElementById('playBtn').textContent='Ⅱ'}else{audio.pause();document.getElementById('playBtn').textContent='▶'}}
+function next(){if(songs.length)play((current+1)%songs.length)}function prev(){if(songs.length)play((current-1+songs.length)%songs.length)}
+function favorite(id){favorites.has(id)?favorites.delete(id):favorites.add(id);localStorage.setItem('azekee-favorites',JSON.stringify([...favorites]));render()}
+function time(t){if(!Number.isFinite(t))return'0:00';return Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')}
+function card(s,i){let fav=favorites.has(s.id),color=palettes[i%palettes.length],initial=(s.title.trim()[0]||'♫').toUpperCase();return `<article class="card"><div class="cover" style="background:linear-gradient(135deg,${color[0]},${color[1]})"><b>${escapeHtml(initial)}</b><span class="cover-tag">AZEKEE • MUSIC</span></div><div class="song-title" title="${escapeHtml(s.title)}">${escapeHtml(s.title)}</div><div class="artist">${escapeHtml(s.artist)}</div><div class="card-actions"><button class="small play-card" onclick="play(${i})">▶ Tinglash</button><button class="small icon-btn ${fav?'active':''}" aria-label="Sevimlilarga qo‘shish" onclick="favorite('${s.id}')">${fav?'♥':'♡'}</button></div></article>`}
+function render(){let q=document.getElementById('search').value.trim().toLocaleLowerCase('uz');let matches=songs.map((s,i)=>({s,i})).filter(x=>(x.s.title+' '+x.s.artist).toLocaleLowerCase('uz').includes(q));document.getElementById('count').textContent=songs.length+' ta trek';document.getElementById('songGrid').innerHTML=matches.length?matches.map(x=>card(x.s,x.i)).join(''):'<div class="empty">Hozircha musiqa mavjud emas.</div>';let favs=songs.map((s,i)=>({s,i})).filter(x=>favorites.has(x.s.id));document.getElementById('favGrid').innerHTML=favs.length?favs.map(x=>card(x.s,x.i)).join(''):'<div class="empty">Sevimli qo‘shiqlar shu yerda ko‘rinadi. ♡ tugmasini bosing.</div>'}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+audio.addEventListener('ended',next);audio.addEventListener('play',()=>document.getElementById('playBtn').textContent='Ⅱ');audio.addEventListener('pause',()=>document.getElementById('playBtn').textContent='▶');audio.addEventListener('loadedmetadata',()=>document.getElementById('duration').textContent=time(audio.duration));audio.addEventListener('timeupdate',()=>{document.getElementById('currentTime').textContent=time(audio.currentTime);document.getElementById('seek').value=audio.duration?audio.currentTime/audio.duration*100:0});document.getElementById('seek').addEventListener('input',e=>{if(audio.duration)audio.currentTime=audio.duration*e.target.value/100});
+document.getElementById('ownerNav').hidden=false;
+loadSongs();checkOwner();
+</script>
+</body>
+</html>
